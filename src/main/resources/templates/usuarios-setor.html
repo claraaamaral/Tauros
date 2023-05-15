@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head-page :: head"></head>
+
+</head>
+
+<body id="page-top" style="background-color: #F8F9FC;">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="fragments/side-bar :: fragment-bar" >
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="fragments/nav-bar :: fragment-nav">
+
+            </nav>
+            <!-- End of Topbar -->
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Usuários</h1>
+                </div>
+
+                <div  th:if="${#request.getParameter('msg')} !=null" class="alert alert-info alert-dismissible fade show" role="alert">
+                    <strong  th:text="${#request.getParameter('msg')}"></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Tabela de usuários</h6>
+                        <hr/>
+                        <a th:if="${usuario2.funcao.descricao == 'RESPONSAVELSETOR'}" href="/responsavel/cadastro/usuario" class="btn btn-outline-primary"> Adicionar Usuário </a>
+                    </div>
+                    <div class="m-2">
+                        <div class="card">
+                            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="home-tab" data-toggle="tab" data-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Usuários</button>
+                                </li>
+                            </ul>
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active m-3" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <table class="table table-bordered" id="table_id" width="100%" cellspacing="0">
+                                        <thead>
+                                        <tr>
+                                            <th>Nome</th>
+                                            <th>Nome de usuário</th>
+                                            <th>Função</th>
+                                            <th>Setor</th>
+                                            <th>Email</th>
+                                            <th>Ações</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="usuario : ${usuarios}">
+                                            <td th:text="${usuario.nome}"></td>
+                                            <td th:text="${usuario.userName}"></td>
+                                            <td th:text="${usuario.funcao.getDescricao()}"></td>
+                                            <td th:if="(${usuario.setor})" th:text="${usuario.setor.getNome()}"></td>
+                                            <td th:unless="(${usuario.setor})">----</td>
+                                            <td th:text="${usuario.email}"></td>
+                                            <td>
+                                                <a data-toggle="modal" th:attr="data-target='#recordDeleteModal'+${usuario.id}" th:href="@{'/deletar/usuario/' + ${usuario.id}}" class="text-decoration-none" >
+                                            <span class="icon text-danger">
+                                                <i  data-toggle="tooltip" data-placement="top" title="Excluir usuário" class="fas fa-trash"></i>
+                                            </span>
+                                                </a>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" th:attr="id='recordDeleteModal'+ ${usuario.id}" tabindex="-1" role="dialog" aria-labelledby="recordDeleteModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="recordDeleteModalLabel">Deletar Usuario</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Tem certeza que deseja deletar esse usuario?
+                                                                <li th:utext="${usuario.nome}"></li>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                                                                <a href="newRecordForm.html" class="btn btn-primary" th:attr="href='/deletar/usuario/'+${usuario.id}">Sim</a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- Modal end -->
+                                                <a th:href="@{'/editar/usuario/' + ${usuario.id}}" class="ml-3">
+                                            <span  data-toggle="tooltip" data-placement="top" title="Editar usuário" class="icon text-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </span>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer th:replace="fragments/footer :: fragment-footer" >
+
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="fragments/nav-bar :: fragment-logout" >
+
+</div>
+</div>
+
+<th:block th:replace="fragments/head-page :: body-final"></th:block>
+
+</body>
+
+</html>

@@ -1,0 +1,89 @@
+
+<!-- Sidebar -->
+<ul th:fragment="fragment-bar" th:if="${usuario2.funcao.descricao == 'ADMIN' || usuario2.funcao.descricao == 'RESPONSAVELSETOR'}"
+    class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar"
+    xmlns:th="http://www.w3.org/1999/xhtml">
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="#">
+
+        <div class="sidebar-brand-text mx-3">Tauros</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+        <a class="nav-link" href="/index">
+            <i class="fas fa-fw fa-home"></i>
+            <span>Página Inicial</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+        Paginas
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+
+        <a th:if="${usuario2.funcao.descricao == 'ADMIN'}" class="nav-link " href="/chamados" >
+            <i class="fas fa-fw fa-comment"></i>
+            <span>Chamados</span>
+        </a>
+
+        <a th:if="${usuario2.funcao.descricao == 'ADMIN'}" class="nav-link " href="/admin/chamados/meus-atendimentos" >
+            <i class="fas fa-fw fa-comment"></i>
+            <span>Meus atendimentos</span>
+        </a>
+
+        <a th:if="${usuario2.funcao.descricao == 'RESPONSAVELSETOR'}" class="nav-link " href="/responsavel/chamados/meus-atendimentos" >
+            <i class="fas fa-fw fa-comment"></i>
+            <span>Meus atendimentos</span>
+        </a>
+
+        <a th:if="${usuario2.funcao.descricao == 'ADMIN'}" class="nav-link " href="/admin/listar/usuarios" >
+            <i class="fas fa-fw fa-users"></i>
+            <span>Usuários</span>
+        </a>
+
+        <a th:if="${usuario2.funcao.descricao == 'RESPONSAVELSETOR'}" class="nav-link " href="/responsavel/listar/usuarios" >
+            <i class="fas fa-fw fa-users"></i>
+            <span>Usuários</span>
+        </a>
+
+
+        <a th:if="${usuario2.funcao.descricao == 'ADMIN'}" class="nav-link " href="/admin/listar/usuarios-pendentes" >
+            <i class="fas fa-fw fa-users-slash"></i>
+            <span>Usuários Pendentes <i th:if="${count != 0}" th:utext="${count}" class="badge"></i>  </span>
+        </a>
+
+        <a th:if="${usuario2.funcao.descricao == 'ADMIN'}" class="nav-link " href="/admin/listar/setores" >
+            <i class="fas fa-fw fa-building"></i>
+            <span>Setores</span>
+        </a>
+
+        <a th:if="${usuario2.funcao.descricao == 'ADMIN' || usuario2.funcao.descricao == 'RESPONSAVELSETOR'}" class="nav-link " href="/problemas" >
+            <i class="fas fa-fw fa-shield-virus"></i>
+            <span>Problemas</span>
+        </a>
+
+        <a th:if=" ${usuario2.funcao.descricao == 'RESPONSAVELSETOR'}" class="nav-link " href="/relatorio/setor/responsavel" >
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>Relatório do Setor</span>
+        </a>
+
+        <a th:if="${usuario2.funcao.descricao == 'ADMIN'}" class="nav-link " href="/relatorio/setor/admin" >
+            <i class="fas fa-fw fa-clipboard-list"></i>
+            <span>Relatorio por Setor</span>
+        </a>
+    </li>
+
+
+
+</ul>
+<!-- End of Sidebar -->
+

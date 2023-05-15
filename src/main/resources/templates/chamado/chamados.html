@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head-page :: head"></head>
+
+</head>
+
+<body id="page-top" style="background-color: #F8F9FC;">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="fragments/side-bar :: fragment-bar" >
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="fragments/nav-bar :: fragment-nav">
+
+            </nav>
+            <!-- End of Topbar -->
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Chamados</h1>
+                </div>
+                <div  th:if="${#request.getParameter('msg')} !=null" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong  th:text="${#request.getParameter('msg')}"></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Tabela de chamados</h6>
+                        <hr/>
+                        <a href="/cadastro/chamado" class="btn btn-outline-primary"> Abrir Chamado </a>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Status</th>
+                                    <th>Problema</th>
+                                    <th>Requisitante</th>
+                                    <th>Data de abertura</th>
+                                    <th>Setor Requisitante</th>
+                                    <th>Ações</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="chamado : ${chamados}">
+                                    <td th:text="${chamado.status}"></td>
+                                    <td th:text="${chamado.problema.nome}"></td>
+                                    <td th:text="${chamado.usuarioAbertura.nome}"></td>
+                                    <td th:text="${chamado.data}"></td>
+                                    <td th:text="${chamado.usuarioAbertura.setor.nome}"></td>
+                                    <td>
+                                        <a  data-toggle="tooltip" data-placement="top" title="Deletar chamado" th:href="@{'/deletar/chamado/' + ${chamado.id}}" class="text-decoration-none">
+                                            <span class="icon text-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                            <span class="text">Excluir</span>
+                                        </a>
+                                        <a data-toggle="tooltip" data-placement="top" title="Editar chamado" th:href="@{'/editar/chamado/' + ${chamado.id}}" class=" text-decoration-noneml-3">
+                                            <span class="icon text-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </span>
+                                            <span class="text">Editar</span>
+                                        </a>
+                                        <a data-toggle="tooltip" data-placement="top" title="Detalhes do chamado"  th:href="@{'/detalhes/chamado/' + ${chamado.id}}" class=" text-decoration-none ml-3">
+                                            <span class="icon text-secondary ">
+                                                <i class="fas fa-search"></i>
+                                            </span>
+                                            <span class="text">Detalhes</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer th:replace="fragments/footer :: fragment-footer" >
+
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="fragments/nav-bar :: fragment-logout" >
+
+</div>
+</div>
+
+<th:block th:replace="fragments/head-page :: body-final"></th:block>
+</body>
+
+</html>

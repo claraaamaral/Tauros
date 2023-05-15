@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head-page :: head"></head>
+
+</head>
+
+<body id="page-top" style="background-color: #F8F9FC;">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="fragments/side-bar :: fragment-bar" >
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="fragments/nav-bar :: fragment-nav">
+
+            </nav>
+            <!-- End of Topbar -->
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Setores</h1>
+                </div>
+                <div  th:if="${#request.getParameter('msg')} !=null" class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong  th:text="${#request.getParameter('msg')}"></strong>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Tabela de setores</h6>
+                        <hr/>
+                        <a href="/admin/cadastro/setor" class="btn btn-outline-primary"> Adicionar Setor </a>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="table_id" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>Ações</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="setor : ${setores}">
+                                    <td th:text="${setor.id}"></td>
+                                    <td th:text="${setor.nome}"></td>
+                                    <td>
+                                        <a data-toggle="modal" th:attr="data-target='#recordDeleteModal'+${setor.id}" th:href="@{'/admin/deletar/setor/' + ${setor.id}}" class="text-decoration-none" >
+                                            <span  data-toggle="tooltip" data-placement="top" title="Excluir Setor" class="icon text-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </span>
+                                        </a>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" th:attr="id='recordDeleteModal'+ ${setor.id}" tabindex="-1" role="dialog" aria-labelledby="recordDeleteModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="recordDeleteModalLabel">Deletar Setor</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        Tem certeza que deseja deletar o setor?
+                                                        <li th:utext="${setor.nome}"></li>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Não</button>
+                                                        <a href="newRecordForm.html" class="btn btn-primary" th:attr="href='/admin/deletar/setor/'+${setor.id}">Sim</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Modal end -->
+                                        <a th:href="@{'/admin/editar/setor/' + ${setor.id}}" class=" text-decoration-none ml-3">
+                                            <span  data-toggle="tooltip" data-placement="top" title="Editar Setor" class="icon text-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer th:replace="fragments/footer :: fragment-footer" >
+
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="fragments/nav-bar :: fragment-logout" >
+
+</div>
+
+
+<th:block th:replace="fragments/head-page :: body-final">
+
+</th:block>
+</body>
+
+</html>

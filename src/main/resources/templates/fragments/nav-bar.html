@@ -1,0 +1,64 @@
+<nav  th:fragment="fragment-nav" class="navbar navbar-expand navbar-light topbar mb-4 static-top shadow" th:classappend="${usuario2.funcao.descricao == 'ADMIN' || usuario2.funcao.descricao ==  'RESPONSAVELSETOR' ? 'bg-white' : 'bg-primary'}" >
+    <a th:if="${usuario2.funcao.descricao == 'ADMIN' || usuario2.funcao.descricao ==  'RESPONSAVELSETOR'}" class="sidebar-brand d-flex align-items-center text-decoration-none justify-content-center" href="#">
+        <img width="50px" src="https://i.imgur.com/mihICqW.png" alt="Logo">
+    </a>
+    <a th:unless="${usuario2.funcao.descricao == 'ADMIN' || usuario2.funcao.descricao ==  'RESPONSAVELSETOR'}" class="sidebar-brand d-flex align-items-center text-decoration-none justify-content-center" href="#">
+        <img width="50px" src="https://i.imgur.com/mihICqW.png" alt="Logo">
+        <div class="sidebar-brand-text mx-3 text-white">TAUROS</div>
+    </a>
+    <!-- Sidebar Toggle (Topbar) -->
+    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
+    </button>
+
+
+
+    <!-- Topbar Navbar -->
+    <ul class="navbar-nav ml-auto">
+        <!-- Nav Item - User Information -->
+        <li class="nav-item dropdown no-arrow">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div  th:classappend="${usuario2.funcao.descricao == 'ADMIN' || usuario2.funcao.descricao ==  'RESPONSAVELSETOR' ? 'text-gray-600' : 'text-white'}" class="mr-2 d-none d-lg-inline small " th:utext="${usuario2.getUserName()}"></div>
+                <i class="fas fa-angle-down"></i>
+            </a>
+            <!-- Dropdown - User Information -->
+            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                 aria-labelledby="userDropdown">
+                <a class="dropdown-item user-select-none" href="/editar/usuario">
+                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Editar usuário
+                </a>
+                <a class="dropdown-item user-select-none" href="/logout" data-toggle="modal" data-target="#logoutModal">
+                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                    Logout
+                </a>
+            </div>
+        </li>
+
+    </ul>
+
+</nav>
+
+
+<!-- Logout Modal-->
+<div  th:fragment="fragment-logout"  class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tem certeza que deseja sair?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Clique em logout para encerrar sua sessão.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <a class="btn btn-primary" href="/logout">Sair</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+

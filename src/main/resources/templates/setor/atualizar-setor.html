@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head-page :: head"></head>
+
+</head>
+
+<body id="page-top" style="background-color: #F8F9FC;">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="fragments/side-bar :: fragment-bar" >
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="fragments/nav-bar :: fragment-nav">
+
+            </nav>
+            <!-- End of Topbar -->
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <div class="container">
+
+                    <div class="card o-hidden border-0 shadow-lg my-5">
+                        <div class="card-body p-3">
+                            <!-- Nested Row within Card Body -->
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="p-5">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Atualizar setor</h1>
+                                        </div>
+                                        <form class="user" th:action="@{/admin/editar/setor}"
+                                              method="post" autocomplete="off" role="form">
+                                            <div class="form-group row">
+                                                <div class="col-sm-12 mb-3 mb-sm-0">
+                                                    <input hidden th:field="${setor.id}">
+                                                    <input th:field="${setor.nome}" type="text" class="form-control form-control-user" id="exampleFirstName"
+                                                           placeholder="Nome do setor">
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="btn btn-primary btn-user btn-block">
+                                                Atualizar
+                                            </button>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer th:replace="fragments/footer :: fragment-footer" >
+
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="fragments/nav-bar :: fragment-logout" >
+
+</div>
+</div>
+
+<th:block th:replace="fragments/head-page :: body-final"></th:block>
+</body>
+
+</html>

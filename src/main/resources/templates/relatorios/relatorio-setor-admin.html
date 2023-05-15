@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head-page :: head"></head>
+
+</head>
+
+<body id="page-top" style="background-color: #F8F9FC;">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="fragments/side-bar :: fragment-bar" >
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="fragments/nav-bar :: fragment-nav">
+
+            </nav>
+            <!-- End of Topbar -->
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <form th:action="@{/relatorio/setor/admin}" method="post" >
+                    Selecione um setor:
+                    <div th:if="${usuario2.funcao.descricao == 'ADMIN'}" class="col-sm-6 d-inline-flex">
+                        <select type="submit"  class="custom-select" id="setor" th:field="${setor.id}" required>
+                            <option value="" selected="selected" >Selecione uma opção...</option>
+                            <option th:each="setor:${setores}" th:text="${setor.nome}"  th:value="${setor.id}"></option>
+                        </select>
+                        <div class="invalid-feedback">Esse campo não pode estar vazio.</div>
+                        <button type="submit" class="btn btn-primary ml-1">Buscar</button>
+                    </div>
+                </form>
+                <br/>
+                <!-- Page Heading -->
+                <div th:if="${problemas != null || operadors != null}" class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Relatório do setor</h1>
+                </div>
+                <div th:if="${problemas != null}" class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Principais Problemas do setor</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="table_id" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Nome</th>
+                                    <th>Descricao</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="problema : ${problemas}">
+                                    <td th:text="${problema.id}"></td>
+                                    <td th:text="${problema.nome}"></td>
+                                    <td th:text="${problema.descricao}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div th:if="${operadores != null}" class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Operadores Eficientes</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="table_id2" width="100%" cellspacing="0">
+                                <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Chamados atendidos</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="operador : ${operadores}">
+                                    <td th:text="${operador.nome}"></td>
+                                    <td th:text="${operador.qtdChamados}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+            </div>
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer th:replace="fragments/footer :: fragment-footer" >
+
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="fragments/nav-bar :: fragment-logout" >
+
+</div>
+
+
+<th:block th:replace="fragments/head-page :: body-final">
+
+</th:block>
+</body>
+
+</html>

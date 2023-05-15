@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-br"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head-page :: head"></head>
+
+</head>
+
+<body id="page-top">
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul th:replace="fragments/side-bar :: fragment-bar" >
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+
+            <!-- Topbar -->
+            <nav th:replace="fragments/nav-bar :: fragment-nav">
+
+            </nav>
+            <!-- End of Topbar -->
+
+
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Detalhes</h1>
+                </div>
+
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <a class="text-decoration-none" href="/voltar">
+                            <i class="fas fa-arrow-left d-inline "></i>
+                        </a>
+                        <h6 class="m-1 font-weight-bold text-primary d-inline">Detalhes do chamado</h6>
+                    </div>
+                    <div class="card-body">
+                        <p>
+                            <strong>Status:</strong>
+                            <h5 th:text="${#strings.toLowerCase(chamado.status)}"> </h5>
+                        </p>
+                        <p>
+                            <strong>Problema:</strong>
+                        <h5 th:text="${#strings.toLowerCase(chamado.problema.nome)}"> </h5>
+                        </p>
+                        <p>
+                            <strong>Requisitante:</strong>
+                        <h5 th:text="${chamado.usuarioAbertura.nome}"> </h5>
+                        </p>
+                        <p>
+                            <strong>Data:</strong>
+                        <h5 th:text="${chamado.data}"> </h5>
+                        </p>
+                        <p>
+                            <strong>Operador:</strong>
+                        <h5 th:if="${chamado.usuarioAtendimento != null}" th:text="${chamado.usuarioAtendimento.nome}"> </h5>
+                        <h5 th:unless="${chamado.usuarioAtendimento != null}"> Nenhum operador atendendo a este chamado. </h5>
+                        </p>
+                        <p>
+                            <strong>Descricao:</strong>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text" th:text="${chamado.descricao}"> </p>
+                            </div>
+                        </div>
+                        </p>
+                        <p>
+                            <strong>Descrição dada pelo operador:</strong>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text" th:if="${chamado.descricaoProblema != null}" th:text="${chamado.descricaoProblema}"> </p>
+                                <p class="card-text" th:unless="${chamado.descricaoProblema != null}">Sem descrição dada pelo operador</p>
+                            </div>
+                        </div>
+                        </p>
+                        <p>
+                            <strong>Solução dada pelo operador:</strong>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text" th:if="${chamado.solucao != null}" th:text="${chamado.solucao}"> </p>
+                                <p class="card-text" th:unless="${chamado.solucao != null}">O chamado ainda não foi solucionado</p>
+                            </div>
+                        </div>
+                        </p>
+                        <p>
+                            <strong>Setor:</strong>
+                        <h5 th:text="${#strings.toLowerCase(chamado.setor.nome)}"> </h5>
+                        </p>
+                    </div>
+                </div>
+        </div>
+        <!-- End of Main Content -->
+
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+<div th:replace="fragments/nav-bar :: fragment-logout" >
+
+</div>
+</div>
+
+<th:block th:replace="fragments/head-page :: body-final"></th:block>
+
+</body>
+
+<!-- Footer -->
+<footer th:replace="fragments/footer :: fragment-footer" >
+
+</footer>
+<!-- End of Footer -->
+</html>
